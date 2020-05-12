@@ -1,5 +1,6 @@
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import Transaction from '../models/Transaction';
+import TransactionDTO from "../dtos/TransactionDTO";
 
 class CreateTransactionService {
   private transactionsRepository: TransactionsRepository;
@@ -8,8 +9,8 @@ class CreateTransactionService {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public execute(): Transaction {
-    // TODO
+  public execute({ title, value, type }: TransactionDTO): Transaction {
+    return this.transactionsRepository.create({ title, value, type });
   }
 }
 
