@@ -7,7 +7,7 @@ describe('Transaction', () => {
     const response = await request(app).post('/transactions').send({
       title: 'Loan',
       type: 'income',
-      value: 1200,
+      value: 300,
     });
 
     expect(isUuid(response.body.id)).toBe(true);
@@ -15,7 +15,7 @@ describe('Transaction', () => {
     expect(response.body).toMatchObject({
       title: 'Loan',
       type: 'income',
-      value: 1200,
+      value: 300,
     });
   });
 
@@ -23,13 +23,13 @@ describe('Transaction', () => {
     await request(app).post('/transactions').send({
       title: 'Salary',
       type: 'income',
-      value: 3000,
+      value: 300,
     });
 
     await request(app).post('/transactions').send({
       title: 'Bicycle',
       type: 'outcome',
-      value: 1500,
+      value: 300,
     });
 
     const response = await request(app).get('/transactions');
@@ -40,27 +40,27 @@ describe('Transaction', () => {
           id: expect.any(String),
           title: 'Salary',
           type: 'income',
-          value: 3000,
+          value: 300,
         }),
         expect.objectContaining({
           id: expect.any(String),
           title: 'Bicycle',
           type: 'outcome',
-          value: 1500,
+          value: 300,
         }),
         expect.objectContaining({
           id: expect.any(String),
           title: 'Loan',
           type: 'income',
-          value: 1200,
+          value: 300,
         }),
       ]),
     );
 
     expect(response.body.balance).toMatchObject({
-      income: 4200,
-      outcome: 1500,
-      total: 2700,
+      income: 600,
+      outcome: 300,
+      total: 300,
     });
   });
 

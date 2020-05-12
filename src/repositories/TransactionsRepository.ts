@@ -40,13 +40,7 @@ class TransactionsRepository {
   }
 
   private calculateTotalTransactions(): number {
-    const transactions = this.transactions.map(t => t.value);
-    
-    if (!transactions.length) {
-      return 0;
-    }
-
-    return transactions.reduce((accumulator, currentValue) => accumulator + currentValue);
+    return this.calculateTransactionsByType('income') - this.calculateTransactionsByType('outcome')
   }
 }
 

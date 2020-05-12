@@ -10,6 +10,12 @@ class CreateTransactionService {
   }
 
   public execute({ title, value, type }: TransactionDTO): Transaction {
+    if (type == 'outcome') {
+      const balance = this.transactionsRepository.getBalance();
+      if (balance.total < value) {
+        throw new Error("Outcome invalid");
+      }
+    }
     return this.transactionsRepository.create({ title, value, type });
   }
 }
